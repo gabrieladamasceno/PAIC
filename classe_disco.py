@@ -34,7 +34,6 @@ class Disco():
         self.ay = fy/self.mass
 
     def colision(self, disco):
-
         dx = (self.x - disco.x)
         dy = (self.y - disco.y)
         distancia = math.sqrt(dx*dx + dy*dy)
@@ -48,6 +47,7 @@ class Disco():
 
 
 
+
     #def new_velocity(self):
 
 
@@ -57,22 +57,15 @@ class Disco():
 
 
     def update(self, gameObjects):
-        for disco in gameObjects:
-            dx = (self.x - disco.x)
-            dy = (self.y - disco.y)
-            distancia = math.sqrt(dx * dx + dy * dy)
-            diametro = (self.radius + disco.radius)
-            if distancia >= diametro:
-                self.x += self.dx
-                self.y += self.dy
+        for disc in gameObjects:
+            self.x += self.dx
+            self.y += self.dy
 
-                for disc in gameObjects:
-                    if disc != self:
-                        self.colision(disc)
+            if (self.x - self.radius <= 0 or self.x + self.radius >= resolution[0]):
+                self.dx *= -1
+            if (self.y - self.radius <= 0 or self.y + self.radius >= resolution[1]):
+                self.dy *= -1
 
-
-                if (self.x - self.radius <= 0 or self.x + self.radius  >= resolution[0]):
-                    self.dx *= -1
-                if (self.y - self.radius  <= 0 or self.y + self.radius  >= resolution[1]):
-                    self.dy *= -1
-
+            for disc in gameObjects:
+                if self != disc:
+                    self.colision(disc)

@@ -19,7 +19,7 @@ screen = pygame.display.set_mode(resolution)
 pygame.display.set_caption('CAIXA')
 
 
-class Disco:
+class Disco():
     def __init__(self, cor, xPos, yPos, xVel, yVel, rad):
         self.cor = cor
         self.x = xPos

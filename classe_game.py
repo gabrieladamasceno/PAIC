@@ -38,7 +38,7 @@ class Game():
         while len(matriz) < num:
             rad = randrange(20,50)
             mass = rad/2
-            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.2, 0.2, rad, mass, uniform(0.5,1.5), uniform(0.5, 1.5))
+            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5,1.5), uniform(0.5, 1.5))
 
             overlapping = False
             for j in range(len(matriz)):
