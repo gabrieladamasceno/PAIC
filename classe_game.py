@@ -1,28 +1,26 @@
-#Bibliotecas
 import sys
 import pygame
 import math
-from random import randrange, random, choice, uniform
+from random import randrange, choice, uniform
 from classe_disco import Disco
 
-#Quantidade partículos
+'''Quantidade partículas'''
 num = int(input("Número de discos: "))
 
-#Resolução da Tela
-resolution = [2000, 1000]
+'''Resolução da Tela'''
+resolution = [800, 800]
 screen = pygame.display.set_mode(resolution)
 pygame.display.set_caption('CAIXA')
 
-
-#Cores
+'''Cores'''
 BLACK = [0, 0, 0]
 WHITE = [255, 255, 255]
 GREEN = [0, 255, 0]
 RED = [255, 0, 0]
 BROWN = [128, 0, 0]
 
-#Classe Game
-class Game():
+'''Classe Game'''
+class Game:
     def __init__(self):
         pygame.init()
 
@@ -38,7 +36,7 @@ class Game():
         while len(matriz) < num:
             rad = randrange(20,50)
             mass = rad/2
-            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5,1.5), uniform(0.5, 1.5))
+            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5,3), uniform(0.5, 3))
 
             overlapping = False
             for j in range(len(matriz)):
@@ -75,7 +73,5 @@ class Game():
                 gameObj.draw(self.screen)
                 gameObj.update(self.gameObjects)
 
-
             self.clock.tick(30)
             pygame.display.flip()
-

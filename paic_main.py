@@ -1,8 +1,7 @@
-#Bibliotecas
 from classe_game import Game
 
 
-#Chamda do Jogo
+'''Chamada do Jogo'''
 game = Game()
 game.load()
 game.run()
