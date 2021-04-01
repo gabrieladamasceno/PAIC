@@ -2,7 +2,7 @@ import pygame
 import math
 
 '''Resolução da Tela'''
-resolution = [800, 800]
+resolution = [1000, 1000]
 '''Classe Disco'''
 class Disco:
     def __init__(self, cor, xpos, ypos, xvel, yvel, rad, m, xacc, yacc):
@@ -32,7 +32,6 @@ class Disco:
         print(f"VelX = {self.dx} VelY = {self.dy} raio = {self.radius}")
         print(f"Disco: Posição X = {disco.x} Posição Y = {disco.y}")
         print(f"VelX = {disco.dx} VelY = {disco.dy} raio = {disco.radius}")
-        print(f"Distancia = {distancia} Diâmetro = {diametro}")
         print(f"Energia Self = {energy_self} e Energia_disco = {energy_disco} ")
 
     def colision(self, disco):
@@ -41,14 +40,17 @@ class Disco:
         distancia = math.sqrt(dx*dx + dy*dy)
         diametro = (self.radius + disco.radius)
         if distancia <= diametro:
+            print("****ANTES DA COLISÃO****")
             self.debug(disco)
             self.dx *= -1
             self.dy *= -1
             disco.dx *= -1
             disco.dy *= -1
-            energy_self = 0.5 * (self.mass) * (self.velo_module())
-            energy_disco = 0.5 * (disco.mass) * (disco.velo_module())
-            print(f"Energia Self Depois = {energy_self} e Energia_disco Depois = {energy_disco} ")
+            print("\n****DEPOIS DA COLISÃO****")
+            self.debug(disco)
+            print("-------------------------------------------")
+
+
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.cor, (int(self.x), int(self.y)), self.radius)

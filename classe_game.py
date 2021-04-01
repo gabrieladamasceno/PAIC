@@ -8,7 +8,7 @@ from classe_disco import Disco
 num = int(input("Número de discos: "))
 
 '''Resolução da Tela'''
-resolution = [800, 800]
+resolution = [1000, 1000]
 screen = pygame.display.set_mode(resolution)
 pygame.display.set_caption('CAIXA')
 
@@ -34,9 +34,9 @@ class Game:
         i = 0
         protecao = 0
         while len(matriz) < num:
-            rad = randrange(20,50)
+            rad = randrange(20 , 50)
             mass = rad/2
-            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5,3), uniform(0.5, 3))
+            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.0 , 0.1), uniform(0.5, 3))
 
             overlapping = False
             for j in range(len(matriz)):
@@ -63,6 +63,7 @@ class Game:
             if event.type == pygame.QUIT:
                 sys.exit(0)
 
+
     def run(self):
         while True:
             self.handleEvents()
@@ -71,7 +72,10 @@ class Game:
 
             for gameObj in self.gameObjects:
                 gameObj.draw(self.screen)
-                gameObj.update(self.gameObjects)
+
+                tecla = pygame.key.get_pressed()
+                if tecla[13] == 0:
+                    gameObj.update(self.gameObjects)
 
             self.clock.tick(30)
             pygame.display.flip()
