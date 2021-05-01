@@ -1,6 +1,7 @@
 import sys
 import pygame
 import math
+import matplotlib.pyplot
 from random import randrange, choice, uniform
 from classe_disco import Disco
 
@@ -34,7 +35,7 @@ class Game:
         i = 0
         protecao = 0
         while len(matriz) < num:
-            rad = randrange(20, 30)
+            rad = randrange(10, 20)
             mass = 1
             disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5, 2))
 
@@ -57,13 +58,11 @@ class Game:
             if protecao > 100000:
                 break
 
-
-
     def handleEvents(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
+                self.grafico()
                 sys.exit(0)
-
 
     def run(self):
         while True:
@@ -76,7 +75,21 @@ class Game:
                 tecla = pygame.key.get_pressed()
                 if tecla[13] == 0:
                     gameObj.update(self.gameObjects)
-                if tecla[13] == 1:
-                    gameObj.velo_media(self.gameObjects)
             self.clock.tick(30)
             pygame.display.flip()
+
+
+    def grafico(self):
+        for gameObj in self.gameObjects:
+            V = []
+            N = []
+            disco = 0
+            while disco < (len(self.gameObjects)):
+                V.append(gameObj.final(self.gameObjects))
+                N.append(disco)
+                disco +=1
+
+            matplotlib.pyplot.plot(V, N)
+            matplotlib.pyplot.show()
+            print(V)
+            print(N)
