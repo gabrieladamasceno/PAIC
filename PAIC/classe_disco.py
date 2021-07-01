@@ -75,13 +75,17 @@ class Disco:
                     self.colision(disc)
 
     def final(self, gameObjects):
+        global velo_quadrada
         maiorx = 0
         maiory = 0
         menorx = 0
         menory = 0
+        V = []
+        N = []
 
         disco = 0
         while disco < len(gameObjects):
+
             if self.dx > maiorx:
                 maiorx = self.dx
             if self.dy > maiory:
@@ -96,9 +100,13 @@ class Disco:
             velomin = math.sqrt(menorx ** 2 + menory ** 2)
 
             velo_quadrada = ((velomax**2) + (velomin **2))/2
+
+            V.append(velo_quadrada)
+            N.append(disco)
             disco += 1
 
-        return velo_quadrada
+        print(V)
+        print(N)
 
 
 

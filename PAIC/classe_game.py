@@ -35,9 +35,9 @@ class Game:
         i = 0
         protecao = 0
         while len(matriz) < num:
-            rad = randrange(10, 20)
-            mass = 1
-            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.15, 0.15, rad, mass, uniform(0.5, 2))
+            rad = randrange(5, 10)
+            mass = 1*(10**-3)
+            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, uniform(0.5, 2))
 
             overlapping = False
             for j in range(len(matriz)):
@@ -81,15 +81,5 @@ class Game:
 
     def grafico(self):
         for gameObj in self.gameObjects:
-            V = []
-            N = []
-            disco = 0
-            while disco < (len(self.gameObjects)):
-                V.append(gameObj.final(self.gameObjects))
-                N.append(disco)
-                disco +=1
+            return gameObj.final(self.gameObjects)
 
-            matplotlib.pyplot.plot(V, N)
-            matplotlib.pyplot.show()
-            print(V)
-            print(N)
