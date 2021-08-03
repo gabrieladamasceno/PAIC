@@ -1,15 +1,17 @@
 import sys
 import pygame
 import math
-import matplotlib.pyplot
 from random import randrange, choice, uniform
 from classe_disco import Disco
+from scipy.stats import maxwell
+import matplotlib.pyplot as plt
+import numpy as np
 
 '''Quantidade partículas'''
 num = int(input("Número de discos: "))
 
 '''Resolução da Tela'''
-resolution = [2000, 1000]
+resolution = [2500, 1000]
 screen = pygame.display.set_mode(resolution)
 pygame.display.set_caption('CAIXA')
 
@@ -35,7 +37,7 @@ class Game:
         i = 0
         protecao = 0
         while len(matriz) < num:
-            rad = randrange(5, 10)
+            rad = 5
             mass = 1*(10**-3)
             disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, uniform(0.5, 2))
 
@@ -80,6 +82,24 @@ class Game:
 
 
     def grafico(self):
-        for gameObj in self.gameObjects:
-            return gameObj.final(self.gameObjects)
+        fig, ax = plt.subplots(1, 1)
 
+        # Parâmetros
+        x = np.linspace(maxwell.ppf(0.01), maxwell.ppf(0.99), num)
+        ax.plot(x, maxwell.pdf(x), 'g-', lw=5, alpha=0.6, label='Curva de Maxwell-Boltzman')
+        y = maxwell.pdf(x)
+
+        # Parametros Histograma
+        r = maxwell.rvs(size=1000)
+        ax.hist(r, density=True, histtype='stepfilled', alpha=0.2, color=None, label= f"Histograma com {num} partículas")
+
+        # Plotar Gráfico
+        ax.legend(loc='upper right', frameon= True)
+        print("Percentual de pontos de função: ")
+        print(x)
+        print("--------------------------------------------------------------------")
+        print("Probabilidade de densidade de função: ")
+        print(y)
+        plt.xlabel("Velocidade (km/s)", size=10)
+        plt.ylabel("Densidade de Probabilidade (s/km)", size=10)
+        plt.show()
