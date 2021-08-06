@@ -64,6 +64,7 @@ class Game:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.grafico()
+                self.dispersao()
                 sys.exit(0)
 
     def run(self):
@@ -103,3 +104,31 @@ class Game:
         plt.xlabel("Velocidade (km/s)", size=10)
         plt.ylabel("Densidade de Probabilidade (s/km)", size=10)
         plt.show()
+
+    def dispersao(self):
+        posY = []
+        X = []
+
+        for disco in self.gameObjects:
+            posY.append(disco.y)
+            X.append(disco.x)
+
+        #Inversão do eixo Y
+        lista = [resolution[1]]*num
+        a = np.array(posY)
+        b = np.array(lista)
+        Y = -1*(a - b)
+
+        print("---------------------------------------------------------")
+        print(f"Posição Y {Y}")
+        print(f"Posição X {X}")
+
+        fig, ax = plt.subplots(1, 1)
+        colors = np.random.rand(num)
+        plt.scatter(X, Y, c=colors, label= f"{num} partículas")
+        ax.legend(loc = 'best', borderpad = 1)
+        plt.xlabel("Posição X", size=9)
+        plt.ylabel("\nPosição Y", size=9)
+        plt.show()
+
+
