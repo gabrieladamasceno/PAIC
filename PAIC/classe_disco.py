@@ -2,7 +2,7 @@ import pygame
 import math
 
 '''Resolução da Tela'''
-resolution = [2000, 1000]
+resolution = [1200, 800]
 '''Classe Disco'''
 class Disco:
     def __init__(self, cor, xpos, ypos, xvel, yvel, rad, m, yacc):
@@ -46,15 +46,15 @@ class Disco:
         distancia = math.sqrt(dx*dx + dy*dy)
         diametro = (self.radius + disco.radius)
         if distancia <= diametro:
-            #print("****ANTES DA COLISÃO****")
-            #self.debug(disco)
+            print("****ANTES DA COLISÃO****")
+            self.debug(disco)
             self.dx *= -1
             self.dy *= -1
             disco.dx *= -1
             disco.dy *= -1
-            #print("\n****DEPOIS DA COLISÃO****")
-            #self.debug(disco)
-            #print("-------------------------------------------")
+            print("\n****DEPOIS DA COLISÃO****")
+            self.debug(disco)
+            print("-------------------------------------------")
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.cor, (int(self.x), int(self.y)), self.radius)

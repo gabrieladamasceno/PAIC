@@ -7,13 +7,15 @@ from scipy.stats import maxwell
 import matplotlib.pyplot as plt
 import numpy as np
 
+
 '''Quantidade partículas'''
+print("\nPara analisar o gráfico de Histogramas pressione F1 \nPara analisar o gráfico de Dispersão pressione F2")
 num = int(input("Número de discos: "))
 
 '''Resolução da Tela'''
-resolution = [2500, 1000]
+resolution = [1200, 800]
 screen = pygame.display.set_mode(resolution)
-pygame.display.set_caption('CAIXA')
+pygame.display.set_caption('Simulação Discos Rígidos')
 
 '''Cores'''
 BLACK = [0, 0, 0]
@@ -39,7 +41,7 @@ class Game:
         while len(matriz) < num:
             rad = 5
             mass = 1*(10**-3)
-            disco = Disco(choice([BLACK, WHITE, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, uniform(0.5, 2))
+            disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, uniform(0.5, 2))
 
             overlapping = False
             for j in range(len(matriz)):
@@ -63,26 +65,31 @@ class Game:
     def handleEvents(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                self.grafico()
+                self.histograma()
                 self.dispersao()
                 sys.exit(0)
+
+            keys = pygame.key.get_pressed()
+            if keys[pygame.K_F1]:
+                self.histograma()
+
+            if keys[pygame.K_F2]:
+                self.dispersao()
+
 
     def run(self):
         while True:
             self.handleEvents()
-            self.screen.fill(GREEN)
+            self.screen.fill(WHITE)
 
             for gameObj in self.gameObjects:
                 gameObj.draw(self.screen)
-
-                tecla = pygame.key.get_pressed()
-                if tecla[13] == 0:
-                    gameObj.update(self.gameObjects)
+                gameObj.update(self.gameObjects)
             self.clock.tick(30)
             pygame.display.flip()
 
 
-    def grafico(self):
+    def histograma(self):
         fig, ax = plt.subplots(1, 1)
 
         # Parâmetros
@@ -96,11 +103,11 @@ class Game:
 
         # Plotar Gráfico
         ax.legend(loc='upper right', frameon= True)
-        print("Percentual de pontos de função: ")
+        '''print("Percentual de pontos de função: ")
         print(x)
         print("--------------------------------------------------------------------")
         print("Probabilidade de densidade de função: ")
-        print(y)
+        print(y)'''
         plt.xlabel("Velocidade (km/s)", size=10)
         plt.ylabel("Densidade de Probabilidade (s/km)", size=10)
         plt.show()
@@ -119,9 +126,9 @@ class Game:
         b = np.array(lista)
         Y = -1*(a - b)
 
-        print("---------------------------------------------------------")
+        '''print("---------------------------------------------------------")
         print(f"Posição Y {Y}")
-        print(f"Posição X {X}")
+        print(f"Posição X {X}")'''
 
         fig, ax = plt.subplots(1, 1)
         colors = np.random.rand(num)
