@@ -9,8 +9,9 @@ import numpy as np
 
 
 '''Quantidade partículas'''
-print("\nPara analisar o gráfico de Histogramas pressione F1 \nPara analisar o gráfico de Dispersão pressione F2")
 num = int(input("Número de discos: "))
+print("\nPara analisar o gráfico de Histogramas pressione F1 \nPara analisar o gráfico de Dispersão pressione F2")
+print("\nPara alterar o potencial gravitacional tecle: \n[F4] para dobrar \n[F5] para quadruplicar \n[F6] para dividir por 1/2 \n[F7] para dividir por 1/4")
 
 '''Resolução da Tela'''
 resolution = [1200, 800]
@@ -33,6 +34,33 @@ class Game:
         self.clock = pygame.time.Clock()
         self.gameObjects = []
 
+    def gravidade(self):
+        g = 1
+        keys = pygame.key.get_pressed()
+
+        if keys[pygame.K_F4]:
+            g1 = 2*g
+            g = g1
+            print(f"Gravidade {g}")
+
+        if keys[pygame.K_F5]:
+            g2 = 4*g
+            g = g2
+            print(f"Gravidade {g}")
+
+        if keys[pygame.K_F6]:
+            g3 = (1/2)*g
+            g = g3
+            print(f"Gravidade {g}")
+
+        if keys[pygame.K_F7]:
+            g4 = (1/4)*g
+            g = g4
+            print(f"Gravidade {g}")
+
+        return g
+
+
     def load(self):
         matriz = []
         overlapping = False
@@ -40,8 +68,9 @@ class Game:
         protecao = 0
         while len(matriz) < num:
             rad = 5
-            mass = 1*(10**-3)
-            disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, uniform(0.5, 2))
+            mass = 1
+            gravidade = self.gravidade()
+            disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, gravidade)
 
             overlapping = False
             for j in range(len(matriz)):
@@ -75,6 +104,18 @@ class Game:
 
             if keys[pygame.K_F2]:
                 self.dispersao()
+
+            if keys[pygame.K_F4]:
+                self.gravidade()
+
+            if keys[pygame.K_F5]:
+                self.gravidade()
+
+            if keys[pygame.K_F6]:
+                self.gravidade()
+
+            if keys[pygame.K_F7]:
+                self.gravidade()
 
 
     def run(self):
