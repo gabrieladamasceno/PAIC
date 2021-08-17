@@ -27,6 +27,8 @@ BROWN = [128, 0, 0]
 
 '''Classe Game'''
 class Game:
+
+    gravidade = 1
     def __init__(self):
         pygame.init()
 
@@ -34,32 +36,10 @@ class Game:
         self.clock = pygame.time.Clock()
         self.gameObjects = []
 
-    def gravidade(self):
-        g = 1
-        keys = pygame.key.get_pressed()
-
-        if keys[pygame.K_F4]:
-            g1 = 2*g
-            g = g1
-            print(f"Gravidade {g}")
-
-        if keys[pygame.K_F5]:
-            g2 = 4*g
-            g = g2
-            print(f"Gravidade {g}")
-
-        if keys[pygame.K_F6]:
-            g3 = (1/2)*g
-            g = g3
-            print(f"Gravidade {g}")
-
-        if keys[pygame.K_F7]:
-            g4 = (1/4)*g
-            g = g4
-            print(f"Gravidade {g}")
-
-        return g
-
+    def operacao(self, g, m):
+        gr = g*m
+        print(gr)
+        return gr
 
     def load(self):
         matriz = []
@@ -69,8 +49,7 @@ class Game:
         while len(matriz) < num:
             rad = 5
             mass = 1
-            gravidade = self.gravidade()
-            disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, gravidade)
+            disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)), randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, self.gravidade)
 
             overlapping = False
             for j in range(len(matriz)):
@@ -106,16 +85,16 @@ class Game:
                 self.dispersao()
 
             if keys[pygame.K_F4]:
-                self.gravidade()
+                self.gravidade = self.operacao(self.gravidade, 2)
 
             if keys[pygame.K_F5]:
-                self.gravidade()
+                self.gravidade = self.operacao(self.gravidade, 4)
 
             if keys[pygame.K_F6]:
-                self.gravidade()
+                self.gravidade = self.operacao(self.gravidade, 0.5)
 
             if keys[pygame.K_F7]:
-                self.gravidade()
+                self.gravidade = self.operacao(self.gravidade, 0.25)
 
 
     def run(self):
@@ -125,7 +104,7 @@ class Game:
 
             for gameObj in self.gameObjects:
                 gameObj.draw(self.screen)
-                gameObj.update(self.gameObjects)
+                gameObj.update(self.gameObjects, self.gravidade)
             self.clock.tick(30)
             pygame.display.flip()
 

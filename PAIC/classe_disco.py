@@ -20,11 +20,6 @@ class Disco:
         norma = math.sqrt((self.dx ** 2) + (self.dy ** 2))
         return norma
 
-    def pressao(self):
-        p = (self.mass * self.ay)/(resolution[0]*resolution[1])
-        return p
-        pass
-
 
     def debug(self, disco):
         dx = (self.x - disco.x)
@@ -59,9 +54,10 @@ class Disco:
     def draw(self, screen):
         pygame.draw.circle(screen, self.cor, (int(self.x), int(self.y)), self.radius)
 
-    def update(self, gameObjects):
+    def update(self, gameObjects, gravidade):
         for disco in gameObjects:
-            self.dy += (1/30)*self.ay
+
+            self.dy += (1/30)*gravidade
             self.x += self.dx
             self.y += self.dy*(1/30)
 
