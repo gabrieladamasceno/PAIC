@@ -3,6 +3,7 @@ import math
 
 '''Resolução da Tela'''
 resolution = [1200, 800]
+
 '''Classe Disco'''
 class Disco:
     def __init__(self, cor, xpos, ypos, xvel, yvel, rad, m, yacc):
