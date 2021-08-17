@@ -55,9 +55,9 @@ class Disco:
         pygame.draw.circle(screen, self.cor, (int(self.x), int(self.y)), self.radius)
 
     def update(self, gameObjects, gravidade):
+        self.ay = gravidade
         for disco in gameObjects:
-
-            self.dy += (1/30)*gravidade
+            self.dy += (1/30)*self.ay
             self.x += self.dx
             self.y += self.dy*(1/30)
 
