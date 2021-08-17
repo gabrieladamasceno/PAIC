@@ -9,6 +9,7 @@ import numpy as np
 
 
 '''Quantidade partículas'''
+
 print("Bem-vindo a simulação!")
 num = int(input("Número de partículas entre 10 e 200: "))
 if 9 < num < 201:
