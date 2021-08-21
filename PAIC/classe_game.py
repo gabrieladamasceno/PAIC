@@ -1,7 +1,7 @@
 import sys
 import pygame
 import math
-from random import randrange, choice, uniform
+from random import randrange, choice
 from classe_disco import Disco
 from scipy.stats import maxwell
 import matplotlib.pyplot as plt
@@ -92,6 +92,9 @@ if 9 < num < 201:
                 if keys[pygame.K_F2]:
                     self.dispersao()
 
+                if keys[pygame.K_F3]:
+                    self.altura()
+
                 if keys[pygame.K_F4]:
                     self.gravidade = self.operacao(self.gravidade, 2)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e o dobro da anterior!")
@@ -108,8 +111,6 @@ if 9 < num < 201:
                     self.gravidade = self.operacao(self.gravidade, 0.25)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e um quarto da anterior!")
 
-                if keys[pygame.K_F8]:
-                    self.altura()
 
         def run(self):
             while True:
@@ -142,6 +143,7 @@ if 9 < num < 201:
             print("--------------------------------------------------------------------")
             print("Probabilidade de densidade de função: ")
             print(y)'''
+            plt.title("Curva de Maxwell-Boltzman", size=11)
             plt.xlabel("Velocidade (km/s)", size=10)
             plt.ylabel("Densidade de Probabilidade (s/km)", size=10)
             plt.show()
@@ -166,16 +168,39 @@ if 9 < num < 201:
 
             fig, ax = plt.subplots(1, 1)
             colors = np.random.rand(num)
-            plt.scatter(X, Y, c=colors, label= f"{num} partículas e {self.gravidade} vezes o potencial inicial")
-            ax.legend(loc = 'best', borderpad = 1)
+            plt.scatter(X, Y, c=colors, label=f"{num} partículas e {self.gravidade} vezes o potencial inicial")
+            plt.title("Gráfico de Dispersão de partículas", size=11)
+            ax.legend(loc = 'best', borderpad=1)
             plt.xlabel("Posição X", size=9)
             plt.ylabel("\nPosição Y", size=9)
             plt.show()
 
         def altura(self):
-            pass
+            posY = []
 
+            for disco in self.gameObjects:
+                posY.append(disco.y)
 
+            # Inversão do eixo Y
+            lista = [resolution[1]] * num
+            a = np.array(posY)
+            b = np.array(lista)
+            Y = -1 * (a - b)
+
+            # Tamanho da amostra
+            tamanho = len(Y)
+
+            # quantidade de Classes (bins)
+            cl = int(round(tamanho ** (1/2), 0))
+
+            plt.title("Histograma de Partículas x Altura", size=11)
+            plt.xlabel("Alturas")
+            plt.ylabel("Partículas")
+
+            # Range é uma tupla indicando o intervalo das alturas. alpha corresponde a saturação da cor
+            plt.hist(Y, bins=cl, range=(min(Y), max(Y)), alpha=0.6, color='g')
+            plt.tight_layout()
+            plt.show()
 
 else:
     print("Digite um número de partículas válido!")
