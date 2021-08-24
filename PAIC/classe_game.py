@@ -203,5 +203,5 @@ if 9 < num < 201:
             plt.show()
 
 else:
-    print("Digite um número de partículas válido!")
+    print("Rode o programa de novo e digite um número de partículas válido!")
     sys.exit(0)
