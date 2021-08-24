@@ -38,15 +38,15 @@ class Disco:
         distancia = math.sqrt(dx * dx + dy * dy)
         diametro = (self.radius + disco.radius)
         if distancia <= diametro:
-            print("****ANTES DA COLISÃO****")
-            self.debug(disco)
+            '''print("****ANTES DA COLISÃO****")
+            self.debug(disco)'''
             self.dx *= -1
             self.dy *= -1
             disco.dx *= -1
             disco.dy *= -1
-            print("\n****DEPOIS DA COLISÃO****")
+            '''print("\n****DEPOIS DA COLISÃO****")
             self.debug(disco)
-            print("-------------------------------------------")
+            print("-------------------------------------------")'''
 
     def draw(self, screen):
         pygame.draw.circle(screen, self.cor, (int(self.x), int(self.y)), self.radius)

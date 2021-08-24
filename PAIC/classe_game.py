@@ -10,8 +10,12 @@ import numpy as np
 '''Quantidade partículas'''
 print("Bem-vindo a simulação!")
 num = int(input("Número de partículas entre 10 e 200: "))
+
 if 9 < num < 201:
-    print("\nPara analisar o gráfico de Histogramas pressione F1 \nPara analisar o gráfico de Dispersão pressione F2")
+    print("\nPara analisar a curva de Maxwell-Boltzman pressione F1 "
+          "\nPara analisar o gráfico de Dispersão pressione F2 "
+          "\nPara analisar o gráfico de Histograma pressione F3")
+
     print("\nPara alterar o potencial gravitacional tecle: \n[F4] para dobrar "
           "\n[F5] para quadruplicar \n[F6] para dividir por 1/2 \n[F7] para dividir por 1/4")
 
@@ -55,7 +59,7 @@ if 9 < num < 201:
             i = 0
             protecao = 0
             while len(matriz) < num:
-                rad = 8
+                rad = 5
                 mass = 1
                 disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)),
                               randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, self.gravidade)
@@ -200,3 +204,4 @@ if 9 < num < 201:
 
 else:
     print("Digite um número de partículas válido!")
+    sys.exit(0)
