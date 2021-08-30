@@ -20,7 +20,7 @@ if 9 < num < 201:
           "\n[F5] para quadruplicar \n[F6] para dividir por 1/2 \n[F7] para dividir por 1/4")
 
     '''Resolução da Tela'''
-    resolution = [1200, 800]
+    resolution = [1200, 1000]
     screen = pygame.display.set_mode(resolution)
     pygame.display.set_caption('Simulação Discos Rígidos')
 
@@ -86,20 +86,20 @@ if 9 < num < 201:
         def handleEvents(self):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.histograma()
+                    self.curva()
                     self.dispersao()
-                    self.altura()
+                    self.histograma()
                     sys.exit(0)
 
                 keys = pygame.key.get_pressed()
                 if keys[pygame.K_F1]:
-                    self.histograma()
+                    self.curva()
 
                 if keys[pygame.K_F2]:
                     self.dispersao()
 
                 if keys[pygame.K_F3]:
-                    self.altura()
+                    self.histograma()
 
                 if keys[pygame.K_F4]:
                     self.gravidade = self.operacao(self.gravidade, 2)
@@ -129,7 +129,7 @@ if 9 < num < 201:
                 pygame.display.flip()
 
         @staticmethod
-        def histograma():
+        def curva():
             fig, ax = plt.subplots(1, 1)
 
             # Parâmetros
@@ -175,7 +175,7 @@ if 9 < num < 201:
             plt.ylabel("\nPosição Y", size=9)
             plt.show()
 
-        def altura(self):
+        def histograma(self):
             posY = []
 
             for disco in self.gameObjects:
