@@ -20,7 +20,7 @@ if 9 < num < 201:
           "\n[F5] para quadruplicar \n[F6] para dividir por 1/2 \n[F7] para dividir por 1/4")
 
     '''Resolução da Tela'''
-    resolution = [1200, 1000]
+    resolution = [2000, 1000]
     screen = pygame.display.set_mode(resolution)
     pygame.display.set_caption('Simulação Discos Rígidos')
 
@@ -59,7 +59,7 @@ if 9 < num < 201:
             i = 0
             protecao = 0
             while len(matriz) < num:
-                rad = 5
+                rad = 6
                 mass = 1
                 disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)),
                               randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, self.gravidade)
