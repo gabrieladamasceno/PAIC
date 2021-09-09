@@ -2,7 +2,7 @@ import pygame
 import math
 
 '''Resolução da Tela'''
-resolution = [2000, 1000]
+resolution = [2560, 1020]
 
 '''Classe Disco'''
 
