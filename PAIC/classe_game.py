@@ -12,7 +12,7 @@ print("Bem-vindo a simulação!")
 num = int(input("Número de partículas entre 10 e 200: "))
 
 if 9 < num < 201:
-    print("\nPara analisar a curva de Maxwell-Boltzman pressione F1 "
+    print("\nPara analisar a curva de Maxwell-Boltzmann pressione F1 "
           "\nPara analisar o gráfico de Dispersão pressione F2 "
           "\nPara analisar o gráfico de Histograma pressione F3")
 
@@ -134,7 +134,7 @@ if 9 < num < 201:
 
             # Parâmetros
             x = np.linspace(maxwell.ppf(0.01), maxwell.ppf(0.99), num)
-            ax.plot(x, maxwell.pdf(x), 'g-', lw=5, alpha=0.6, label='Curva de Maxwell-Boltzman')
+            ax.plot(x, maxwell.pdf(x), 'g-', lw=5, alpha=0.6, label='Curva de Maxwell-Boltzmann')
 
             # Parametros Histograma
             r = maxwell.rvs(size=1000)
@@ -143,7 +143,7 @@ if 9 < num < 201:
 
             # Plotar Gráfico
             ax.legend(loc='upper right', frameon=True)
-            plt.title("Curva de Maxwell-Boltzman", size=11)
+            plt.title("Curva de Maxwell-Boltzmann", size=11)
             plt.xlabel("Velocidade (km/s)", size=10)
             plt.ylabel("Densidade de Probabilidade (s/km)", size=10)
             plt.show()
