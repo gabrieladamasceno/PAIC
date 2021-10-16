@@ -46,7 +46,7 @@ if 9 < num < 201:
             self.gameObjects = []
 
         @staticmethod
-        def operacao(g, m):
+        def potential(g, m):
             gr = g * m
             if 0 < gr <= 8:
                 return gr
@@ -62,7 +62,7 @@ if 9 < num < 201:
                 rad = 8
                 mass = 1
                 disco = Disco(choice([BLACK, GREEN, RED, BROWN]), randrange(rad, (resolution[0] - rad)),
-                              randrange(rad, (resolution[1] - rad)), 0.1, 0.1, rad, mass, self.gravidade)
+                              randrange(rad, (resolution[1] - rad)), 0.01*randrange(5, 10), 0.01*randrange(5, 10), rad, mass, self.gravidade)
 
                 overlapping = False
                 for j in range(len(matriz)):
@@ -102,19 +102,19 @@ if 9 < num < 201:
                     self.histograma()
 
                 if keys[pygame.K_F4]:
-                    self.gravidade = self.operacao(self.gravidade, 2)
+                    self.gravidade = self.potential(self.gravidade, 2)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e o dobro da anterior!")
 
                 if keys[pygame.K_F5]:
-                    self.gravidade = self.operacao(self.gravidade, 4)
+                    self.gravidade = self.potential(self.gravidade, 4)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e o quádruplo da anterior!")
 
                 if keys[pygame.K_F6]:
-                    self.gravidade = self.operacao(self.gravidade, 0.5)
+                    self.gravidade = self.potential(self.gravidade, 0.5)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e a metade da anterior!")
 
                 if keys[pygame.K_F7]:
-                    self.gravidade = self.operacao(self.gravidade, 0.25)
+                    self.gravidade = self.potential(self.gravidade, 0.25)
                     print(f"A gravidade agora é {self.gravidade} vezes a inicial e um quarto da anterior!")
 
         def run(self):
